@@ -8,6 +8,7 @@ import { CoinDashboardState } from './state/coin.reducer';
 import { Observable } from 'rxjs';
 import { selectAllCoins, selectError, selectLoading } from './state/coin.selectors';
 import { DataTableComponent } from './data-table/data-table.component';
+import { DataChartComponent } from './data-chart/data-chart.component';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ import { DataTableComponent } from './data-table/data-table.component';
     RouterOutlet,
     MatToolbarModule,
     CommonModule,
-    DataTableComponent
+    DataTableComponent,
+    DataChartComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

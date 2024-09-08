@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -6,7 +6,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { CoinDashboardState } from '../state/coin.reducer';
 import { selectAllCoins } from '../state/coin.selectors';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -28,7 +28,8 @@ import { MatSelectModule } from '@angular/material/select';
   templateUrl: './data-table.component.html',
   styleUrl: './data-table.component.scss'
 })
-export class DataTableComponent implements OnInit {
+export class DataTableComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
   displayedColumns: string[] = [
     'id',
     'name',
@@ -61,27 +62,42 @@ export class DataTableComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.store.select(selectAllCoins).subscribe(coins => {
-      this.dataSource.data = coins;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
+    this.store.select(selectAllCoins)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(coins => {
+        this.dataSource.data = coins;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
 
-    this.searchControl.valueChanges.subscribe((value) => {
-      this.search(value!);
-    });
+    this.searchControl.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+        this.search(value!);
+      });
 
-    this.nameFilter.valueChanges.subscribe((value) => {
-      this.applyFilters();
-    });
+    this.nameFilter.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+        this.applyFilters();
+      });
 
-    this.symbolFilter.valueChanges.subscribe((value) => {
-      this.applyFilters();
-    });
+    this.symbolFilter.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+        this.applyFilters();
+      });
 
-    this.marketCapFilter.valueChanges.subscribe((value) => {
-      this.applyFilters();
-    });
+    this.marketCapFilter.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+        this.applyFilters();
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   search(filterValue: string) {
