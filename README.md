@@ -2,25 +2,17 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.3.
 
-## Development server
+## Installation
+- Download Node.js version [18.19.1](https://nodejs.org/en/blog/release/v18.19.1)  
+- Install Angular cli with `npm install -g @angular/cli`
+- Navigate to project root folder `coin-dashboard` and run `npm i` to install dependencies.
+- Run `npm start` to start the project. Navigate to `http://localhost:4200/`.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Libraries used
+- [Highcharts](https://www.highcharts.com/docs/index)  
+- [Angular Material](https://material.angular.io/)
+- [NgRX](https://ngrx.io/)
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
 ## Further help
 
