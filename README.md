@@ -6,7 +6,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Download Node.js version [18.19.1](https://nodejs.org/en/blog/release/v18.19.1)  
 - Install Angular cli with `npm install -g @angular/cli`
 - Navigate to project root folder `coin-dashboard`.
-- Checkout the working branch `git checkout dev/coin-dashboard`.
 - Run `npm i` to install dependencies.
 - Run `npm start` to start the project. Navigate to `http://localhost:4200/`.
 
