@@ -7,6 +7,7 @@ import { coinsLoading } from './state/coin.actions';
 import { CoinDashboardState } from './state/coin.reducer';
 import { Observable } from 'rxjs';
 import { selectAllCoins, selectError, selectLoading } from './state/coin.selectors';
+import { DataTableComponent } from './data-table/data-table.component';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ import { selectAllCoins, selectError, selectLoading } from './state/coin.selecto
     RouterOutlet,
     MatToolbarModule,
     CommonModule,
+    DataTableComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -32,6 +34,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(coinsLoading({ page: 1, perPage: 50 }));
+    this.store.dispatch(coinsLoading({ page: 1, perPage: 250 }));
   }
 }

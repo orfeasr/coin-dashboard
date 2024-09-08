@@ -13,8 +13,4 @@
 <div *ngIf="error$ | async as error">
   <p>Error: {{ error }}</p>
 </div>
-<ul>
-  <li *ngFor="let coin of coins$ | async">
-    {{ coin.name }} - {{ coin.current_price | currency }}
-  </li>
-</ul>
+<app-data-table></app-data-table>
