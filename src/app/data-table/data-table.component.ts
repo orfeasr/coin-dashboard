@@ -11,6 +11,8 @@ import { CoinDashboardState } from '../state/coin.reducer';
 import { selectAllCoins } from '../state/coin.selectors';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-data-table',
@@ -23,7 +25,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCardModule,
+    MatButtonModule
   ],
   templateUrl: './data-table.component.html',
   styleUrl: './data-table.component.scss'
@@ -56,8 +60,11 @@ export class DataTableComponent implements OnInit, OnDestroy {
   symbolFilter = new FormControl('');
   marketCapFilter = new FormControl('');
 
+  defaultFilterPredicate: (data: any, filter: string) => boolean;
+
   constructor(private store: Store<{ coinState: CoinDashboardState }>) {
     this.coins$ = this.store.select(selectAllCoins);
+    this.defaultFilterPredicate = this.dataSource.filterPredicate;
   }
 
   ngOnInit(): void {
@@ -101,6 +108,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
   }
 
   search(filterValue: string) {
+    this.dataSource.filterPredicate = this.defaultFilterPredicate;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
@@ -127,5 +135,13 @@ export class DataTableComponent implements OnInit, OnDestroy {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  resetAll() {
+    this.searchControl.reset();
+    this.nameFilter.reset();
+    this.symbolFilter.reset();
+    this.marketCapFilter.reset();
+    this.dataSource._updateChangeSubscription();
   }
 }

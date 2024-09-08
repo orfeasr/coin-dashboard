@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
 import { Store } from '@ngrx/store';
 import * as Highcharts from 'highcharts';
 import { CoinDashboardState } from '../state/coin.reducer';
@@ -12,7 +13,8 @@ import { Subject, takeUntil } from 'rxjs';
   standalone: true,
   imports: [
     CommonModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    MatCardModule
   ],
   templateUrl: './data-chart.component.html',
   styleUrl: './data-chart.component.scss'

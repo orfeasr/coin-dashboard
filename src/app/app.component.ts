@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, LOCALE_ID, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Store } from '@ngrx/store';
 import { coinsLoading } from './state/coin.actions';
@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 import { selectAllCoins, selectError, selectLoading } from './state/coin.selectors';
 import { DataTableComponent } from './data-table/data-table.component';
 import { DataChartComponent } from './data-chart/data-chart.component';
+import localeEl from '@angular/common/locales/el';
+registerLocaleData(localeEl, 'el-GR');
 
 @Component({
   selector: 'app-root',
@@ -19,6 +21,9 @@ import { DataChartComponent } from './data-chart/data-chart.component';
     CommonModule,
     DataTableComponent,
     DataChartComponent
+  ],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'el-GR' }
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
