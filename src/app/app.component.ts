@@ -2,6 +2,7 @@ import { Component, LOCALE_ID, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Store } from '@ngrx/store';
 import { coinsLoading } from './state/coin.actions';
 import { CoinDashboardState } from './state/coin.reducer';
@@ -18,6 +19,7 @@ registerLocaleData(localeEl, 'el-GR');
   imports: [
     RouterOutlet,
     MatToolbarModule,
+    MatProgressSpinnerModule,
     CommonModule,
     DataTableComponent,
     DataChartComponent

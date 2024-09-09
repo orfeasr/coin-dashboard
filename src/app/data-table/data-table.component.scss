@@ -1,8 +1,13 @@
 // Container for the whole table and filters
-.table-container {
+.outer-container {
   margin: 20px 0;
   padding: 10px;
-  overflow-x: auto;
+}
+
+.table-container {
+  max-height: 600px;
+  overflow-y: hidden;
+  max-width: 100%;
 }
 
 // Flexbox for filters & search bar
